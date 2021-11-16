@@ -1,6 +1,6 @@
 # Solución del Laboratorio 4
 # Juan Diego Cerdas Angulo, B81928
-#Alonso Jiménez Villegas, B94125
+# Alonso Jiménez Villegas, B94125
 
 # Los parámetros T, t_final y N son elegidos arbitrariamente
 
@@ -16,12 +16,11 @@ que contenga sus valores.
 
 vaC = stats.norm(5, np.sqrt(0.2))
 vaZ = stats.uniform(0, np.pi/2)
-#w = (2*np.pi*59.1 + 2*np.pi*60.1)/2
 w = np.linspace(2*np.pi*59.1, 2*np.pi*60.1, 200)
 
 # Creación del vector de tiempo
-T = 200		# número de elementos
-t_final = 15	# tiempo en segundos
+T = 200  # número de elementos
+t_final = 15  # tiempo en segundos
 t = np.linspace(0, t_final, T)
 
 # Inicialización del proceso aleatorio X(t) con N realizaciones
@@ -33,11 +32,11 @@ for i in range(N):
 	C = vaC.rvs()
 	Z = vaZ.rvs()
 	x_t = C * np.cos(w*t + Z)
-	X_t[i,:] = x_t
+	X_t[i, :] = x_t
 	plt.plot(t, x_t)
 
 # Promedio de las N realizaciones en cada instante (cada punto en t)
-P = [np.mean(X_t[:,i]) for i in range(len(t))]
+P = [np.mean(X_t[:, i]) for i in range(len(t))]
 plt.plot(t, P, lw=4)
 
 # Graficar el resultado teórico del valor esperado
@@ -63,8 +62,8 @@ plt.figure()
 # Cálculo de correlación para cada valor de tau
 for n in range(N):
 	for i, tau in enumerate(desplazamiento):
-		corr[n, i] = np.correlate(X_t[n,:], np.roll(X_t[n,:], tau))/T
-	plt.plot(taus, corr[n,:])
+		corr[n, i] = np.correlate(X_t[n, :], np.roll(X_t[n, :], tau))/T
+	plt.plot(taus, corr[n, :])
 
 # Valor teórico de correlación
 Rxx = 19/2 * np.cos(np.pi*taus)
@@ -84,30 +83,29 @@ plt.show()
 medio de su rango posible de valores.
 '''
 
-vaC = stats.norm(5, np.sqrt(0.2))
-vaZ = stats.uniform(0, np.pi/2)
+
 w = (2*np.pi*59.1 + 2*np.pi*60.1)/2
 
 
 # Creación del vector de tiempo
-T = 200		# número de elementos
-t_final = 15	# tiempo en segundos
+T = 200  # número de elementos
+t_final = 15  # tiempo en segundos
 t = np.linspace(0, t_final, T)
 
 # Inicialización del proceso aleatorio X(t) con N realizaciones
 N = 10
-X_t = np.empty((N, len(t)))	# N funciones del tiempo x(t) con T puntos
+X_t = np.empty((N, len(t)))  # N funciones del tiempo x(t) con T puntos
 
 # Creación de las muestras del proceso x(t) (A y Z independientes)
 for i in range(N):
 	C = vaC.rvs()
 	Z = vaZ.rvs()
 	x_t = C * np.cos(w*t + Z)
-	X_t[i,:] = x_t
+	X_t[i, :] = x_t
 	plt.plot(t, x_t)
 
 # Promedio de las N realizaciones en cada instante (cada punto en t)
-P = [np.mean(X_t[:,i]) for i in range(len(t))]
+P = [np.mean(X_t[:, i]) for i in range(len(t))]
 plt.plot(t, P, lw=4)
 
 # Graficar el resultado teórico del valor esperado
@@ -133,8 +131,8 @@ plt.figure()
 # Cálculo de correlación para cada valor de tau
 for n in range(N):
 	for i, tau in enumerate(desplazamiento):
-		corr[n, i] = np.correlate(X_t[n,:], np.roll(X_t[n,:], tau))/T
-	plt.plot(taus, corr[n,:])
+		corr[n, i] = np.correlate(X_t[n, :], np.roll(X_t[n, :], tau))/T
+	plt.plot(taus, corr[n, :])
 
 # Valor teórico de correlación
 Rxx = 19/2 * np.cos(np.pi*taus)
